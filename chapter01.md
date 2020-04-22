@@ -18,8 +18,8 @@ void max2(int A[], int lo, int hi, int& x1, int& x2) {
     if (lo + 2 == hi) {
         if (A[x1 = lo] < A[x2 = lo + 1]) {
             swap(x1, x2);
-            return;
         }
+        return; // 必须return使递归结束
     }
 
     // 最终还剩3个元素
@@ -49,7 +49,7 @@ void max2(int A[], int lo, int hi, int& x1, int& x2) {
 
 int main()
 {
-    int A[] = {1,5,6,4,11,3,8};
+    int A[] = {1,5,6,4,11,3,8,9,10};
     int x1, x2;
     max2(A, 0, sizeof(A)/sizeof(A[0]), x1, x2);
     std::cout << x1 << '\t' << x2 << std::endl;
