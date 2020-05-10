@@ -114,11 +114,120 @@ void swap(int& a, int& b) {
 }
 ```
 
+## 归并排序(merge_sort)
+
+```c++
+/*
+ * title: 归并排序(merge_sort)
+ */
+#include <iostream>
+#include <cstdlib>
+
+// 将有序数组合并
+void merge_sort_core(int arr[], int begin, int mid, int end) {
+    int i = begin, j = mid, k = 0;
+    int* temp = (int*)std::malloc(sizeof(int) * (end - begin));
+
+    for (; i < mid && j < end; temp[k++] = (arr[i]<arr[j]?arr[i++]:arr[j++]));
+    for (; i < mid; temp[k++]=arr[i++]);
+    for (; j < end; temp[k++]=arr[j++]);
+    for (i = begin, k = 0; i < end; arr[i++]=temp[k++]);
+    
+    free(temp);
+}
+
+void merge_sort(int arr[], int begin, int end) {
+    if (end - begin < 2)
+        return;
+    int mid = (begin + end) >> 1;   // 计算中点
+    merge_sort(arr, begin, mid);    // 二分递归排序
+    merge_sort(arr, mid, end);
+    merge_sort_core(arr, begin, mid, end);  // 将排好序的数组合并
+}
+
+int main() {
+    int a[] = {45, 32, 33, 23, 16, 2, 38, 7};
+    merge_sort(a, 0, sizeof(a)/sizeof(a[0]));
+    for (auto iter : a)
+        std::cout << iter << ' ';
+
+    return 0;
+}
+```
+
+# 迭代与递归
+
+## 减而治之
+
+> 为求解一个大规模的问题，可以：
+>
+> 将其划分为两个子问题，其一**平凡**，另一**规模缩减**				// 单调性
+>
+> 分别求解子问题
+>
+> 由子问题的解，得到原问题的解
+
+```c++
+// 递归求和
+#include <iostream>
+
+int sum(int A[], int n) {
+    return (n < 1) ? 0 : sum(A, n-1) + A[n-1];
+}
+
+int main() {
+    int a[] = {1,3,4,5};
+    std::cout << sum(a, sizeof(a)/sizeof(a[0]));
+    return 0;
+}
+```
+
+
+
+**求解递归复杂度的两种方法：递归跟踪、递归方程。**
+
+* 递归跟踪（适用于简单递归模式）：
+
+  检查每个递归实例，累计所需时间就是算法执行时间。
+
+* 递归方程（适用于复杂递归模式）：
+
+## 分而治之
+
+> 为求解一个大规模的问题，可以：
+>
+> 将其划分为若干（通常两个）子问题，规模大体**相当**
+>
+> 分别求解子问题
+>
+> 由子问题的解，得到原问题的解
+
+**二分递归求和：**
+
+```c++
+#include <iostream>
+
+int sum(int A[], int lo, int hi) {
+    if (lo == hi) return A[lo];
+    int mid = (lo + hi) >> 1;
+    return sum(A, lo, mid) + sum(A, mid + 1, hi);
+}
+
+int main() {
+    int a[] = {1, 3, 7, 3};
+    std::cout << sum(a, 0, sizeof(a)/sizeof(a[0]) - 1);
+
+    return 0;
+}
+```
+
 
 
 ## 查找数组中最大两个值的索引
 
 ```c++
+// 计算数组[a,b)中最大和次大的数的索引
+// x1表示最大值索引，x2表示次大值索引
 #include <iostream>
 
 void swap(int& a, int& b) {
@@ -171,4 +280,16 @@ int main()
     return 0;
 }
 ```
+
+# 动态规划
+
+
+
+## 动态规划
+
+## 递归方程
+
+## 递归跟踪
+
+## 迭代
 
