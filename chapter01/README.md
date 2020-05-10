@@ -47,6 +47,7 @@ int main() {
 ## 问题规模
 
 * 令T(n) = 用算法A求解某一问题规模为n的实例，所需的计算成本。在规模同为n的所有实例中，只关注最坏的情况。
+* T(n)=算法输入规模为n的问题，所需要执行的基本操作次数。
 
 ## 图灵机
 
@@ -55,12 +56,65 @@ int main() {
 * 字符的种类有限
 * 读写头总是对准一个单元格
 
-
+# 算法分析
 
 ## 级数
 
 * $$1 + \frac{1}{2} + \frac{1}{3} + ... + \frac{1}{n} = O(\log{n})$$
+
 * $$\log{1} + log{2} + \log{3} + ... + \log{n} = O(n \log{n})$$
+
+* $$1 + 2 + ... + n = O(n^2)$$
+
+* $$1^2 + 2^2 + ... + n^2 = O(n^3)$$
+
+* $$1^3 + 2^3 + ... + n^3 = O(n^4)$$
+
+  幂方级数：比幂次高一阶
+
+* $$a^0 + a^1 + a^2 + ... + a^n = O(a^n)$$
+
+* 收敛级数的复杂度是$$O(1)$$
+
+## 冒泡排序
+
+```c++
+//
+// Created by wangheng on 2020/5/10.
+//
+
+#include <iostream>
+
+void bubbleSort(int A[], int n);
+void swap(int&, int&);
+
+int main() {
+    int a[5] = {3, 6, 2, 1, 4};
+    bubbleSort(a, sizeof(a) / sizeof(a[0]));
+    for (auto iter : a)
+        std::cout << iter << ' ';
+    return 0;
+}
+
+void bubbleSort(int A[], int n) {
+    for (bool sorted = false; sorted = !sorted; n--) {
+        for (int i = 1; i < n; i++) {
+            if (A[i-1] > A[i]) {
+                sorted = false;
+                swap(A[i-1], A[i]);
+            }
+        }
+    }
+}
+
+void swap(int& a, int& b) {
+    int temp = a;
+    a = b;
+    b = temp;
+}
+```
+
+
 
 ## 查找数组中最大两个值的索引
 
