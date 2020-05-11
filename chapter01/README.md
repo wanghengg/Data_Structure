@@ -451,13 +451,67 @@ int main()
 
 # 动态规划
 
+## `fibonacci`数列
+
+`fibonacci`递归版
+
+```c++
+int fib(int n) {
+    return (2 > n) ? n : fib(n - 1) + fib(n - 2);
+}
+```
+
+算法的时间复杂度为$$O(n^2)$$，复杂度过高
+
+**颠倒计算方向：由自顶向下递归，为自底向上迭代**
+
+`fibonacci`迭代版
+
+```c++
+long long fib(long long n) {
+    long long f = 1, g = 0;	// 初始化定义fib(-1), fib(0)
+    while (0 < n--) {	// 根据原始定义，通过n次加法和减法计算fib(n)
+        g += f;		// 计算最新一项
+        f = g - f;	// 更新前一项为原来的g
+    }
+    return g;
+}
+```
+
+## 最长公共子序列
+
+```c++
+// 递归实现，时间复杂度O(n^2)
+#include <iostream>
+#include <cstring>
+
+int LCS(const char *str1, const char *str2, int l1, int l2) {
+    if (l1 >= 0 && l2 >= 0) {
+        if (str1[l1] == str2[l2])	// 减而治之
+            return LCS(str1, str2, l1-1, l2-1) + 1;
+        else	// 分而治之
+            return LCS(str1, str2, l1, l2 - 1) > LCS(str1, str2, l1 - 1, l2) ?
+                LCS(str1, str2, l1, l2 - 1) : LCS(str1, str2, l1 - 1, l2);
+    } else
+        return 0;
+}
+
+int main() {
+    const char *str1 = "program";
+    const char *str2 = "algorithm";
+    std::cout << LCS(str1, str2, std::strlen(str1) - 1, std::strlen(str2) - 1);
+
+    return 0;
+}
+```
+
+递归实现，时间复杂度$$O(n^2)$$
+
+```c++
+// 
+```
 
 
-## 动态规划
 
-## 递归方程
 
-## 递归跟踪
-
-## 迭代
 
