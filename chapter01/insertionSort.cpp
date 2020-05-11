@@ -6,8 +6,10 @@
 
 void insertionSort(int A[], int length) {
     int preIndex, current;
+    // i表示已排序个数
     for (int i = 1; i < length; i++) {
         preIndex = i - 1;
+        // 保存未排序部分的第一个元素值
         current = A[i];
         while (preIndex >= 0 && A[preIndex] > current) {
             A[preIndex + 1] = A[preIndex];
