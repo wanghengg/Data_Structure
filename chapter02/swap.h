@@ -6,7 +6,7 @@
 #define DATA_STRUCTURE_SWAP_H
 
 template<typename T>
-void swap(const T& a, const T& b) {
+void swap(T& a, T& b) {
     T c = a;
     a = b;
     b = c;
