@@ -11,13 +11,9 @@ template<typename T>
 Rank binSearch(T* S, const T& e, Rank lo, Rank hi) {
     while (lo < hi) {
         Rank mi = (lo + hi) >> 1;
-        if (e < S[mi])
-            hi = mi;
-        else if (S[mi] < e)
-            lo = mi + 1;
-        else return mi;
+        (e < S[mi]) ? hi = mi : lo = mi + 1;
     }
-    return -1;
+    return --lo;
 }
 
 #endif //DATA_STRUCTURE_BINSEARCH_H
