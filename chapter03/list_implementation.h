@@ -36,6 +36,33 @@ void List<T>::copyNodes(ListNode<T> *p, int n) {
 }
 
 template<typename T>
+void List<T>::merge(ListNode<T> *&, int, List<T> &, ListNode<T> *, int) {
+
+}
+
+template<typename T>
+void List<T>::mergeSort(ListNode<T> *&p, int n) {
+
+}
+
+template<typename T>
+void List<T>::selectionSort(ListNode<T> *p, int n) {
+    ListNode<T>* tail = p;
+    for (int i = 0; i < n; ++i)
+        tail = tail->succ;
+    while (0 < --n) {
+        auto max = selectMax(p, n + 1);
+        insertBefore(tail, remove(max));
+        tail = tail->pred;
+    }
+}
+
+template<typename T>
+void List<T>::insertionSort(ListNode<T> *p, int n) {
+
+}
+
+template<typename T>
 List<T>::List(List<T> const &L) {
     copyNodes(L.first(), L._size);
 }
@@ -90,9 +117,9 @@ ListNode<T>* List<T>::search(const T &e, int n, ListNode<T> *p) const {
 
 template<typename T>
 ListNode<T>* List<T>::selectMax(ListNode<T> *p, int n) {
-    T max = p->data;
+    ListNode<T>* max = p;
     while (0 < --n)
-        max = ((p = p->succ)->data > max) ? p->data : max;
+        max = (((p = p->succ)->data) > max->data) ? p : max;
     return max;
 }
 
@@ -129,6 +156,20 @@ T List<T>::remove(ListNode<T> *p) {
     p = nullptr;
     _size--;
     return e;
+}
+
+template<typename T>
+void List<T>::sort(ListNode<T> *p, int n) {
+    switch (rand() % 3) {
+        case 1:
+            insertionSort(p, n);
+            break;
+        case 2:
+            selectionSort(p, n);
+            break;
+        default:
+            mergeSort(p, n);
+    }
 }
 
 template<typename T>

@@ -19,8 +19,8 @@ protected:
     void copyNodes(ListNode<T>*, int ); // 复制列表中自位置p起的n项
     void merge(ListNode<T>*&, int, List<T>&, ListNode<T>*, int);    // 归并
     void mergeSort(ListNode<T>*&, int);  // 对从p开始连续的n个节点归并排序
-    void selectSort(ListNode<T>*, int); // 对从p开始连续的n个节点选择排序
-    void insertSort(ListNode<T>*, int); // 对从p开始连续的n个节点插入排序
+    void selectionSort(ListNode<T>*, int); // 对从p开始连续的n个节点选择排序
+    void insertionSort(ListNode<T>*, int); // 对从p开始连续的n个节点插入排序
 
 public:
     // 构造函数
