@@ -19,6 +19,7 @@ template<typename T> struct ListNode {
     // 操作接口
     ListNode<T>* insertAsPred(T const &e);
     ListNode<T>* insertAsSucc(T const &e);
+    T getData() { return data; }
 };
 
 #include "listNode_implementation.h"
