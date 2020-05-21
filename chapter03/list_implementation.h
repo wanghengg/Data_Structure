@@ -80,6 +80,15 @@ ListNode<T> * List<T>::find(const T &e, int n, ListNode<T> *p) const {
 }
 
 template<typename T>
+ListNode<T>* List<T>::search(const T &e, int n, ListNode<T> *p) const {
+    while (0 < n--) {
+        if (((p = p->succ)->data) <= e)
+            break;
+    }
+    return p;
+}
+
+template<typename T>
 ListNode<T>* List<T>::selectMax(ListNode<T> *p, int n) {
     T max = p->data;
     while (0 < --n)
