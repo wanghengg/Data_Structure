@@ -65,8 +65,19 @@ void List<T>::selectionSort(ListNode<T> *p, int n) {
 
 template<typename T>
 void List<T>::insertionSort(ListNode<T> *p, int n) {
-    for (int r = 0; r < n; ++r) {
-        insertAfter(search(p->data, r, p), p->data);
+//    for (int r = 0; r < n; ++r) {
+//        insertAfter(search(p->data, r, p), p->data);
+//        p = p->succ;
+//        remove(p->pred);
+//    }
+// 书中的insertionSort算法实现方法错误，不能正确对list进行排序
+    p = p->succ;
+    for (int r = 1; r < n; ++r) {
+        ListNode<T>* q = search(p->data, r, p);
+        if (q->data >= p->data)
+            insertBefore(q, p->data);
+        else
+            insertAfter(q, p->data);
         p = p->succ;
         remove(p->pred);
     }
@@ -119,7 +130,7 @@ ListNode<T> * List<T>::find(const T &e, int n, ListNode<T> *p) const {
 template<typename T>
 ListNode<T>* List<T>::search(const T &e, int n, ListNode<T> *p) const {
     while (0 < n--) {
-        if (((p = p->succ)->data) <= e)
+        if (((p = p->pred)->data) <= e)
             break;
     }
     return p;
