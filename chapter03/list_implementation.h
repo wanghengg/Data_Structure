@@ -6,6 +6,7 @@
 #define DATA_STRUCTURE_LIST_IMPLEMENTATION_H
 
 #include "list.h"
+#include "../chapter02/swap.h"
 
 template<typename T>
 void List<T>::init() {
@@ -53,9 +54,12 @@ void List<T>::selectionSort(ListNode<T> *p, int n) {
         tail = tail->succ;
     while (0 < --n) {
         // 这里必须使用head->succ,不能直接使用p，因为p作为第一个元素可能被remove。
-        auto max = selectMax(head->succ, n + 1);
-        insertBefore(tail, remove(max));
-        tail = tail->pred;
+        ListNode<T>* max = selectMax(head->succ, n + 1);
+//        insertBefore(tail, remove(max));
+//        tail = tail->pred;
+        // 交换max节点和tail节点的data，不使用remove和insertBefore，提高效率
+        // 因为insertBefore和remove需要动态分配内存，相对消耗时间
+        swap(max->data, (tail = tail->pred)->data);
     }
 }
 
