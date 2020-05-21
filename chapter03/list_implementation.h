@@ -226,4 +226,12 @@ void List<T>::reverse() {
 
 }
 
+template<typename T>
+void List<T>::print() const {
+    ListNode<T>* iter = header;
+    for (int i = 0; i < _size; i++)
+        std::cout << (iter = iter->succ)->data << ' ';
+    std::cout << std::endl;
+}
+
 #endif //DATA_STRUCTURE_LIST_IMPLEMENTATION_H
