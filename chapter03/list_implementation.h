@@ -47,11 +47,13 @@ void List<T>::mergeSort(ListNode<T> *&p, int n) {
 
 template<typename T>
 void List<T>::selectionSort(ListNode<T> *p, int n) {
+    ListNode<T>* head = p->pred;
     ListNode<T>* tail = p;
     for (int i = 0; i < n; ++i)
         tail = tail->succ;
     while (0 < --n) {
-        auto max = selectMax(p, n + 1);
+        // 这里必须使用head->succ,不能直接使用p，因为p作为第一个元素可能被remove。
+        auto max = selectMax(head->succ, n + 1);
         insertBefore(tail, remove(max));
         tail = tail->pred;
     }
@@ -59,7 +61,11 @@ void List<T>::selectionSort(ListNode<T> *p, int n) {
 
 template<typename T>
 void List<T>::insertionSort(ListNode<T> *p, int n) {
-
+    for (int r = 0; r < n; ++r) {
+        insertAfter(search(p->data, r, p), p->data);
+        p = p->succ;
+        remove(p->pred);
+    }
 }
 
 template<typename T>
