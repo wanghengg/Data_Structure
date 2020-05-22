@@ -206,6 +206,7 @@ void List<T>::sort(ListNode<T> *p, int n) {
     }
 }
 
+// 无序列表唯一化
 template<typename T>
 int List<T>::deduplicate() {
     if (2 > _size) return 0;
@@ -219,6 +220,7 @@ int List<T>::deduplicate() {
     return oldSize - _size;
 }
 
+// 有序列表唯一化
 template<typename T>
 int List<T>::uniquify() {
     if ( _size < 2 ) return 0;
@@ -238,16 +240,19 @@ template<typename T>
 void List<T>::reverse() {
     ListNode<T>* p = header;
     ListNode<T>* q = trailer;
+    // 直接交换数据项
     for (int i = 1; i < _size; i += 2)
         swap((p = p->succ)->data, (q = q->pred)->data);
 }
 
+// 使用函数指针对列表进行遍历操作
 template<typename T>
 void List<T>::traverse(void (*visit)(T &)) {
     for (ListNode<T>* p = header->succ; p != trailer; p = p->succ)
         visit(p->data);
 }
 
+// 使用函数对象对列表进行遍历操作，实用性更强
 template<typename T>
 template<typename VST>
 void List<T>::traverse(VST &visit) {
