@@ -236,7 +236,10 @@ int List<T>::uniquify() {
 
 template<typename T>
 void List<T>::reverse() {
-
+    ListNode<T>* p = header;
+    ListNode<T>* q = trailer;
+    for (int i = 1; i < _size; i += 2)
+        swap((p = p->succ)->data, (q = q->pred)->data);
 }
 
 template<typename T>
