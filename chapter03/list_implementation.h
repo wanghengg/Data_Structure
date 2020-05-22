@@ -7,6 +7,7 @@
 
 #include "list.h"
 #include "../chapter02/swap.h"
+#include <random>
 
 template<typename T>
 void List<T>::init() {
@@ -37,17 +38,37 @@ void List<T>::copyNodes(ListNode<T> *p, int n) {
 }
 
 template<typename T>
-void List<T>::merge(ListNode<T> *&, int, List<T> &, ListNode<T> *, int) {
-
+void List<T>::merge(ListNode<T> *&p, int n, List<T> &L, ListNode<T> *q, int m) {
+    ListNode<T>* pp = p->pred;
+    while (0 < m) {
+        if ( (0 < n) && (p->data <= q->data) ) {
+            if (q == (p = p->succ))
+                break;
+            n--;
+        } else {
+            insertBefore(p, L.remove((q = q->succ)->pred));
+            m--;
+        }
+    }
+    p = pp->succ;
 }
 
 template<typename T>
 void List<T>::mergeSort(ListNode<T> *&p, int n) {
-
+    std::cout << "mergeSort()" << std::endl;
+    if (n < 2) return;
+    int m = n >> 1;
+    ListNode<T>* q = p;
+    for (int i = 0; i < m; i++)
+        q = q->succ;
+    mergeSort(p, m);
+    mergeSort(q, n - m);
+    merge(p, m, *this, q, n - m);
 }
 
 template<typename T>
 void List<T>::selectionSort(ListNode<T> *p, int n) {
+    std::cout << "selectionSort()" << std::endl;
     ListNode<T>* head = p->pred;
     ListNode<T>* tail = p;
     for (int i = 0; i < n; ++i)
@@ -65,6 +86,7 @@ void List<T>::selectionSort(ListNode<T> *p, int n) {
 
 template<typename T>
 void List<T>::insertionSort(ListNode<T> *p, int n) {
+    std::cout << "insertionSort()" << std::endl;
     for (int r = 0; r < n; ++r) {
         insertAfter(search(p->data, r, p), p->data);
         p = p->succ;
@@ -170,7 +192,9 @@ T List<T>::remove(ListNode<T> *p) {
 
 template<typename T>
 void List<T>::sort(ListNode<T> *p, int n) {
-    switch (rand() % 3) {
+    std::uniform_int_distribution<unsigned int> dis(0,2);
+    std::random_device rd;
+    switch (dis(rd) % 3) {
         case 1:
             insertionSort(p, n);
             break;
@@ -213,6 +237,19 @@ int List<T>::uniquify() {
 template<typename T>
 void List<T>::reverse() {
 
+}
+
+template<typename T>
+void List<T>::traverse(void (*visit)(T &)) {
+    for (ListNode<T>* p = header->succ; p != trailer; p = p->succ)
+        visit(p->data);
+}
+
+template<typename T>
+template<typename VST>
+void List<T>::traverse(VST &visit) {
+    for (ListNode<T>* p = header->succ; p != trailer; p = p->succ)
+        visit(p->data);
 }
 
 template<typename T>

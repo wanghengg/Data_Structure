@@ -36,7 +36,7 @@ public:
     Rank size() const { return _size; } // 规模
     bool empty() const { return _size <= 0; }   // 判空
     T& operator[](Rank r) const ;   // 重载，支持寻秩访问
-    ListNode<T>* first() const { return header->succ; } // 首节点位置
+    ListNode<int> * first() const { return header->succ; } // 首节点位置
     ListNode<T>* end() const { return trailer->pred; }  // 末节点位置
     bool valid(ListNode<T>* p) // 判断位置p是否合法
     {
@@ -68,6 +68,7 @@ public:
     void traverse(void (*)(T&));    // 遍历
     template<typename VST>
     void traverse(VST&);    // 遍历（函数对象）
+    void print() const ;   // 按顺序打印列表的每一个元素
 };
 
 #include "list_implementation.h"
