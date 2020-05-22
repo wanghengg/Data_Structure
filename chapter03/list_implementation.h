@@ -65,19 +65,8 @@ void List<T>::selectionSort(ListNode<T> *p, int n) {
 
 template<typename T>
 void List<T>::insertionSort(ListNode<T> *p, int n) {
-//    for (int r = 0; r < n; ++r) {
-//        insertAfter(search(p->data, r, p), p->data);
-//        p = p->succ;
-//        remove(p->pred);
-//    }
-// 书中的insertionSort算法实现方法错误，不能正确对list进行排序
-    p = p->succ;
-    for (int r = 1; r < n; ++r) {
-        ListNode<T>* q = search(p->data, r, p);
-        if (q->data >= p->data)
-            insertBefore(q, p->data);
-        else
-            insertAfter(q, p->data);
+    for (int r = 0; r < n; ++r) {
+        insertAfter(search(p->data, r, p), p->data);
         p = p->succ;
         remove(p->pred);
     }
@@ -129,18 +118,18 @@ ListNode<T> * List<T>::find(const T &e, int n, ListNode<T> *p) const {
 
 template<typename T>
 ListNode<T>* List<T>::search(const T &e, int n, ListNode<T> *p) const {
-    while (0 < n--) {
-        if (((p = p->pred)->data) <= e)
+    while (-1 < n--) {  // 对于p的n个前驱，从右向左逐个比较
+        if (((p = p->pred)->data) <= e) // 直至命中，或者越界
             break;
     }
-    return p;
+    return p;   // 查找失败返回区间左边界的前驱
 }
 
 template<typename T>
 ListNode<T>* List<T>::selectMax(ListNode<T> *p, int n) {
     ListNode<T>* max = p;
     while (0 < --n)
-        max = (((p = p->succ)->data) > max->data) ? p : max;
+        max = (((p = p->succ)->data) >= max->data) ? p : max;
     return max;
 }
 
