@@ -8,7 +8,7 @@
 // 将有序数组合并
 void merge_sort_core(int arr[], int begin, int mid, int end) {
     int i = begin, j = mid, k = 0;
-    int* temp = new int[sizeof(int) * (end - begin)];
+    int* temp = new int[end-begin];
 
     for (; i < mid && j < end; temp[k++] = (arr[i]<arr[j]?arr[i++]:arr[j++]));
     for (; i < mid; temp[k++]=arr[i++]);
