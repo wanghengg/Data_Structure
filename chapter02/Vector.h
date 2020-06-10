@@ -43,6 +43,7 @@ public:
     bool empty() const { return !_size; }
     T& operator[](Rank r) const ;
     Rank insert(Rank r, T const &e);
+    Rank insert(T const &e) { return insert(_size, e); }
     int remove(Rank lo, Rank hi);
     T remove(Rank r);
     Rank find(T const & e, Rank lo, Rank hi) const ;    // 无序向量区间查找
@@ -62,5 +63,7 @@ public:
     void mergeSort(Rank lo, Rank hi);   // 归并排序
     void mergeSort() { mergeSort(0, _size); }
 };
+
+#include "Vector_implementation.h"
 
 #endif //TEST_VECTOR_H
