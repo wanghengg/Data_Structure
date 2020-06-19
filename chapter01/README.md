@@ -461,7 +461,7 @@ int fib(int n) {
 }
 ```
 
-算法的时间复杂度为$$O(n^2)$$，复杂度过高
+算法的时间复杂度为$O(n^2)$，复杂度过高
 
 **颠倒计算方向：由自顶向下递归，为自底向上迭代**
 
@@ -546,4 +546,52 @@ int main() {
 ```
 
 
+
+# 课后习题
+
+## 1-2
+
+![image-20200616080749983](https://gitee.com/wanghengg/picture/raw/master/2020/image-20200616080749983.png)
+
+海岛高度$H = d * h / (d_1 - d_2) + h$
+
+海岛距离$D = d * d_2 / (d_1 - d_2)$
+
+```c++
+float islandHeight(float d1, float d2, float d, float h) {
+    float pha = d1 - d2;
+    float shi = d * h;
+    return shi / pha + h;
+}
+```
+
+```c++
+float islandDistance(float d1, float d2, float d) {
+    float shi = d2 * d;
+    float pha = d1 - d2;
+    return shi / pha;
+}
+```
+
+## 1-3
+
+(a) 所有元素已经有序
+
+(b) ![image-20200616090255255](https://gitee.com/wanghengg/picture/raw/master/2020/image-20200616090255255.png)
+
+(c) ![image-20200616090626876](https://gitee.com/wanghengg/picture/raw/master/2020/image-20200616090626876.png)
+
+(d) 所有元素处于完全逆序的状态
+
+## 1-4
+
+不能。对n个整数进行排序，至少要对每个元素访问一次，所以时间复杂度不可能低于$O(n)$
+
+## 1-6
+
+输入规模按$n = 10^9$人口计算，计算量为$n^2 = 10^{18}$
+
+该电脑的计算能力按$10^9$计，则大致需要$10^{18-9}=10^9$秒 = 30年
+
+## 1-7
 
