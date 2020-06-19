@@ -8,6 +8,7 @@
 #include "list.h"
 #include "../chapter02/swap.h"
 #include <random>
+#include <iostream>
 
 template<typename T>
 void List<T>::init() {
