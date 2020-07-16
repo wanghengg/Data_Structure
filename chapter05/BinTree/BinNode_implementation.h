@@ -35,16 +35,12 @@ void BinNode<T>::travPre(VST &visit) {}
 
 template<typename T>
 template<typename VST>
-<<<<<<< HEAD
 void BinNode<T>::travIn(VST &visit) {
     if(!this) return;
     visit(data);
     lc->travIn(visit);
     rc->travIn(visit);
 }
-=======
-void BinNode<T>::travIn(VST &visit) {}
->>>>>>> 327f5f82924c13b661b331df3f07c67f0907bd56
 
 template<typename T>
 template<typename VST>
