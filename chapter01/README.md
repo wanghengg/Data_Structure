@@ -461,7 +461,7 @@ int fib(int n) {
 }
 ```
 
-算法的时间复杂度为$$O(n^2)$$，复杂度过高
+算法的时间复杂度为$O(n^2)$，复杂度过高
 
 **颠倒计算方向：由自顶向下递归，为自底向上迭代**
 
@@ -546,4 +546,85 @@ int main() {
 ```
 
 
+
+# 课后习题
+
+## 1-2
+
+![image-20200616080749983](https://gitee.com/wanghengg/picture/raw/master/2020/image-20200616080749983.png)
+
+海岛高度$H = d * h / (d_1 - d_2) + h$
+
+海岛距离$D = d * d_2 / (d_1 - d_2)$
+
+```c++
+float islandHeight(float d1, float d2, float d, float h) {
+    float pha = d1 - d2;
+    float shi = d * h;
+    return shi / pha + h;
+}
+```
+
+```c++
+float islandDistance(float d1, float d2, float d) {
+    float shi = d2 * d;
+    float pha = d1 - d2;
+    return shi / pha;
+}
+```
+
+## 1-3
+
+(a) 所有元素已经有序
+
+(b) ![image-20200616090255255](https://gitee.com/wanghengg/picture/raw/master/2020/image-20200616090255255.png)
+
+(c) ![image-20200616090626876](https://gitee.com/wanghengg/picture/raw/master/2020/image-20200616090626876.png)
+
+(d) 所有元素处于完全逆序的状态
+
+## 1-4
+
+不能。对n个整数进行排序，至少要对每个元素访问一次，所以时间复杂度不可能低于$O(n)$
+
+## 1-6
+
+输入规模按$n = 10^9$人口计算，计算量为$n^2 = 10^{18}$
+
+该电脑的计算能力按$10^9$计，则大致需要$10^{18-9}=10^9$秒 = 30年
+
+## 1-8
+
+> 试证明，在用对数函数界定渐进复杂度时，常底数的具体取值无所谓。
+
+$$
+f(n) = O(\log_an) = O(\frac{\log_bn}{\log_ba})=O((\frac{\ln b}{\ln a}) * \log_b n) = O(\log_b n)
+$$
+
+
+
+## 1-9
+
+> 试证明，对于任何$\varepsilon > 0$，都有$\log n = O(n^{\varepsilon})$。
+
+![image-20200619114701334](https://gitee.com/wanghengg/picture/raw/master/2020/image-20200619114701334.png)
+
+## 1-12
+
+```c++
+int countOnes(unsigned int n) {
+    int ones = 0;
+    while (0 < n) {
+        ones++;
+        n &= n - 1;	// 清除当前最靠右的1
+    }
+    return ones;
+}
+```
+
+## 1-17
+
+> 试证明，若每个递归实例仅需使用常数规模的空间，则地递归算法所需的空间总量将线性正比于最大的递归深度。
+
+根据递归跟踪分析方法， 在递归程序的执行过程中，系统必须动态地记录所有活跃的递归实例。在任何时刻，这些活跃的递归实例都可以按照调用关系，构成一个调用链，该程序执行期间所需的空间，主要用于维护上述的调用链。不难看出，根据题目所给的条件，这部分空间量应该线性正比于调用链的最大长度，亦即最大的递归深度。
 

@@ -23,7 +23,11 @@ template<typename T> struct BinNode{
     int size(); // 统计当前节点后代总数，亦即一起为根的子树的规模
     BinNode* insertAsLc(T const &); // 作为当前节点的左孩子插入新节点
     BinNode* insertAsRc(T const &); // 作为当前节点的右孩子插入新节点
+<<<<<<< HEAD
     BinNode* succ();    // (中序遍历意义下)取当前节点的直接后继
+=======
+    BinNode* succ();    // 取当前节点的直接后继
+>>>>>>> 327f5f82924c13b661b331df3f07c67f0907bd56
     template<typename VST> void travLevel(VST&);    // 子树层次遍历
     template<typename VST> void travPre(VST&);  // 子树先序遍历
     template<typename VST> void travIn(VST&);   // 子树中序遍历

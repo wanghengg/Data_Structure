@@ -1,8 +1,3 @@
-//
-// Created by wangheng on 2020/5/13.
-//
-
-#include "Vector.h"
 #include "swap.h"
 #include "binSearch.h"
 #include "fibSearch.h"
@@ -176,4 +171,3 @@ void Vector<T>::mergeSort(Rank lo, Rank hi) {
     mergeSort(mi, hi);
     merge(lo, mi, hi);
 }
-
