@@ -5,6 +5,7 @@
 #include "release.h"
 #include "BinTree_remove.h"
 #include <algorithm>
+#include "BinNode_travInorder.h"
 
 template<typename T>
 int BinTree<T>::updateHeight(BinNode<T> *x) {
