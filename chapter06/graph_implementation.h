@@ -11,7 +11,7 @@ template <typename Tv> struct Vertex{
     int dTime, fTime;
     int parent;
     int priority;
-    Vertex(Tv const &d = (Tv)0) :
+    explicit Vertex(Tv const &d = (Tv)0) :
             data(d), inDegree(0), outDegree(0), status(UNDISCOVERED),
             dTime(-1), fTime(-1), parent(-1), priority(INT_MAX) {}
 };
@@ -46,8 +46,8 @@ public:
     virtual int firstNbr(int i) { return nextNbr(i, this->n); } // 首个邻接顶点
     virtual int nextNbr(int i, int j)
     {
-        while ((-1 < j) && (!exists(i, --j)))
-            return j;
+        while ((-1 < j) && (!exists(i, --j)));
+        return j;
     }
     virtual VStatus &status(int i) { return V[i].status; }
     virtual int& dTime(int i) { return V[i].dTime; }

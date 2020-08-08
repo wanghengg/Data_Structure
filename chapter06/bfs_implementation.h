@@ -17,10 +17,10 @@ void Graph<Tv, Te>::bfs(int s) {
 }
 
 template <typename Tv, typename Te>
-void Graph<Tv, Te>::BFS(int v, int &clock) {
+void Graph<Tv, Te>::BFS(int i, int &clock) {
     Queue<int> Q;
-    status(v) = DISCOVERED;
-    Q.enqueue(v);
+    status(i) = DISCOVERED;
+    Q.enqueue(i);
     while (!Q.empty()) {
         int v = Q.dequeue();
         dTime(v) = ++clock;
